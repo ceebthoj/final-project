@@ -1,6 +1,6 @@
 
 import { Link,useLocation } from 'react-router-dom'
-const Sidebar = () => {
+const Sidebar = ({data}) => {
     const location = useLocation();
     const isActive = (path) => {
         return location.pathname ===path;
@@ -11,8 +11,8 @@ const Sidebar = () => {
             <h1 className='text-white font-bold text-xl uppercase'>Category</h1>
         </div>
         <nav className='flex flex-col gap-2'>
-        {linkData.map((link) => (
-            <Link to={link.path} key={link.id} className={ isActive(link.path) ? `px-4 py-2 bg-[#0A8C27] text-white capitalize` : `px-4 py-2 capitalize `}>{link.name}</Link>
+        {data?.map((link) => (
+            <Link to={link.name ==="tool"?"/":"/" + link.name} key={link._id} className={ isActive(link.name === 'tool'? "/":"/"+link.name) ? `px-4 py-2 bg-[#0A8C27] text-white capitalize` : `px-4 py-2 capitalize `}>{link.name}</Link>
         ))}
         </nav>
     </div>
