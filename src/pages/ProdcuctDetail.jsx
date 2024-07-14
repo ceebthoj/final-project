@@ -10,12 +10,19 @@ import { API_LINk } from "../constant/api";
 
 const PrdocutDetail = () => {
   const [product,setProduct] = useState(null)
+  const [relativeProducts,setRelativeProducts] = useState([])
   const [isLoading,setIsLoading] = useState(false)
   const {id} = useParams();
    useEffect(() =>{
     getProdcuct();
   },[id])
 
+
+   useEffect(() =>{
+    if(product?.name){
+      getRelativeProducts(product?.name);
+    }
+  },[product?.name])
 
   const getProdcuct = async () =>{
     setIsLoading(true)
@@ -32,13 +39,18 @@ const PrdocutDetail = () => {
       setIsLoading(false)
     }
    }
+   const getRelativeProducts = async (productName) =>{
+      const response  = await axios.get(`${API_LINk}/product/relatived-product?name=${productName}`)
+      console.log("data-relative",response?.data?.data);
+      setRelativeProducts(response.data.data)
+   }
   return (
      <>
        {
         isLoading ? <div>Loading.....</div> :
         <div className="min-h-screen px-[10%] py-4">
         <div className="flex gap-3 my-4 items-center">
-         <Link to="/"><h3 className="text-base font-medium hover:underline hover:text-[#0A8C27]">Home</h3></Link><h3><FaChevronRight/></h3> <h3 className="text-base font-medium">Product Detail</h3>
+         <Link to="/"><h3 className="text-base font-medium hover:underline hover:text-[#0A8C27]">ໜ້າຫຼັກ</h3></Link><h3><FaChevronRight/></h3> <h3 className="text-base font-medium">ລາຍການສີນຄ້າ</h3>
         </div>
       <div className="flex gap-3 w-full mt-6">
         <div className="flex justify-center md:w-[40%] bg-green-600 rounded-md overflow-hidden">
@@ -55,9 +67,9 @@ const PrdocutDetail = () => {
       <div className="mt-10">
         <h3 className="text-xl font-bold">Recommend Similar Products for you </h3>
         <div className="grid grid-cols-5 gap-4 mt-4">
-          {/* {productData.map((item) => (
-            <ProductCard key={item.id} prodcut={item} />
-          ))} */}
+          {relativeProducts?.map((item,index) => (
+            <ProductCard key={index} prodcut={item} />
+          ))}
         </div>
       </div>
     </div>

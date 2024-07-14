@@ -23,7 +23,7 @@ const Equipment = () => {
   },[])
   return (
     <div className='w-full p-2'>
-        <h4 className='text-xl font-bold'>Equipment</h4>
+        <h4 className='text-xl font-bold'>ອຸປະກອນ</h4>
        <div className='w-full grid grid-cols-4 gap-4 mt-6'>
                {productList?.map((item) => (
                   <ProductCard key={item._id} prodcut={item} />

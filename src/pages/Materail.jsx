@@ -24,7 +24,7 @@ const Materail = () => {
   },[])
   return (
     <div className='w-full p-2'>
-         <h4 className='text-xl font-bold'>Materail</h4>
+         <h4 className='text-xl font-bold'>ວັດສະດຸ</h4>
        <div className='w-full grid grid-cols-4 gap-4 my-6'>
                {productList?.map((item) => (
                   <ProductCard key={item._id} prodcut={item} />
